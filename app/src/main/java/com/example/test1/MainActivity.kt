@@ -1,6 +1,7 @@
 package com.example.test1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -8,6 +9,9 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -19,6 +23,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var locationSource: FusedLocationSource
     private lateinit var naverMap: NaverMap
+
+    lateinit var naverMapList: NaverMapItem
+    lateinit var naverMapInfo: List<NaverMapData?>
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
@@ -63,6 +70,39 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     @UiThread
     override fun onMapReady(naverMap: NaverMap) {
+
+        val naverMapApiInterface =
+            NaverMapRequest.getClient().create(NaverMapApiInterface::class.java)
+        val call: Call<NaverMapItem> = naverMapApiInterface.getMapData()
+
+        call.enqueue(object : Callback<NaverMapItem> {
+            override fun onResponse(call: Call<NaverMapItem>, response: Response<NaverMapItem>) {
+
+                if (response.isSuccessful) {
+                    naverMapList = response.body()!!
+                    naverMapInfo = naverMapList?.MAPSTOREINFO!!
+
+                    val marker = Marker()
+
+                    val lat = naverMapInfo!![0]?.storeLat
+                    val lnt = naverMapInfo!![0]?.storeLng
+
+                    Log.d("TAG", "lat: $lat, lnt: $lnt")
+
+                    marker.position = LatLng(lat!!, lnt!!)
+                    marker.map = naverMap
+
+                    // 통신 실패 처리
+                }
+            }
+
+            override fun onFailure(call: Call<NaverMapItem>, t: Throwable) {
+                val errorMessage = t.message
+                Log.d("TAG", "Error: $errorMessage")
+            }
+        })
+
+
         this.naverMap = naverMap
 
         naverMap.setLocationSource(locationSource)
