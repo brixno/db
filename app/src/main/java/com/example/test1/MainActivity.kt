@@ -3,6 +3,9 @@ package com.example.test1
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.annotation.UiThread
@@ -40,13 +43,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         NaverMapSdk.getInstance(this).client =
             NaverMapSdk.NaverCloudPlatformClient("j3k2fo0cl0")
 
-        setContentView(R.layout.map_fragment_activity)
+        setContentView(R.layout.activity_main)
 
 
         val fm = supportFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+        val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
             ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.map, it).commit()
+                fm.beginTransaction().add(R.id.map_fragment, it).commit()
             }
 
         mapFragment.getMapAsync(this)
@@ -97,12 +100,20 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         val finalI = i
                         markers[i]?.setOnClickListener(object : Overlay.OnClickListener {
                             override fun onClick(@NonNull overlay: Overlay): Boolean {
+
                                 val mapInfoName = naverMapInfo[finalI]?.storeName
-                                val mapInfoLocation = naverMapInfo[finalI]?.storeLocation
-                                val intent = Intent(this@MainActivity, MapInfoActivity::class.java)
-                                intent.putExtra("name", mapInfoName)
-                                intent.putExtra("loca", mapInfoLocation)
-                                startActivity(intent)
+                                val mapInfoLoca = naverMapInfo[finalI]?.storeLocation
+
+                                val getMapInfoName = findViewById<TextView>(R.id.map_info_name)
+                                val getMapInfoLoca = findViewById<TextView>(R.id.map_info_addr)
+
+                                getMapInfoName?.text = mapInfoName
+                                getMapInfoLoca?.text = mapInfoLoca
+
+                                var mapInfoLayout = findViewById<LinearLayout>(R.id.map_info_layout2)
+
+                                mapInfoLayout?.visibility = View.VISIBLE
+
                                 return false
                             }
                         })
