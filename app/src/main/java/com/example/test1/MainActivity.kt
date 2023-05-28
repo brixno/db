@@ -1,8 +1,10 @@
 package com.example.test1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -93,9 +95,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         markers[i]?.map = naverMap
 
                         val finalI = i
-                        markers[i]?.setOnClickListener(Overlay.OnClickListener { overlay ->
-                            Toast.makeText(application, "마커 $finalI 클릭", Toast.LENGTH_SHORT).show()
-                            false
+                        markers[i]?.setOnClickListener(object : Overlay.OnClickListener {
+                            override fun onClick(@NonNull overlay: Overlay): Boolean {
+                                val mapInfoName = naverMapInfo[finalI]?.storeName
+                                val mapInfoLocation = naverMapInfo[finalI]?.storeLocation
+                                val intent = Intent(this@MainActivity, MapInfoActivity::class.java)
+                                intent.putExtra("name", mapInfoName)
+                                intent.putExtra("loca", mapInfoLocation)
+                                startActivity(intent)
+                                return false
+                            }
                         })
                     }
 
