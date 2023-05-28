@@ -27,7 +27,7 @@
             tools:ignore="UselessParent">
             <ImageView
                 android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_height="120dp"
                 android:src="@drawable/bicycle"
                 android:layout_gravity="center"
                 tools:ignore="ContentDescription" />
@@ -43,7 +43,7 @@
                     android:id="@+id/map_info_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="식당명"
+                    android:text="자전거대여소명"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
 
@@ -51,23 +51,30 @@
                     android:id="@+id/map_info_addr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="주소"
+                    android:text="소재지지번주소"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/map_info_time"
+                    android:id="@+id/map_info_cate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="영업시간"
+                    android:text="자전거대여소구분"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/map_info_day_off"
+                    android:id="@+id/map_info_cnt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="휴무일"
+                    android:text="자전거보유대수"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:id="@+id/map_info_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="관리기관전화번호"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>

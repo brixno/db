@@ -11,6 +11,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.gson.annotations.SerializedName
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -103,12 +104,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
                                 val mapInfoName = naverMapInfo[finalI]?.storeName
                                 val mapInfoLoca = naverMapInfo[finalI]?.storeLocation
+                                val mapInfoCate = naverMapInfo[finalI]?.storeCategory
+                                val mapInfoCnt = naverMapInfo[finalI]?.storeCnt
+                                val mapInfoNum = naverMapInfo[finalI]?.managerNum
 
                                 val getMapInfoName = findViewById<TextView>(R.id.map_info_name)
                                 val getMapInfoLoca = findViewById<TextView>(R.id.map_info_addr)
+                                val getmapInfoCate = findViewById<TextView>(R.id.map_info_cate)
+                                val getmapInfoCnt = findViewById<TextView>(R.id.map_info_cnt)
+                                val getmapInfoNum = findViewById<TextView>(R.id.map_info_num)
+
+
 
                                 getMapInfoName?.text = mapInfoName
                                 getMapInfoLoca?.text = mapInfoLoca
+                                getmapInfoCate?.text = mapInfoCate
+                                getmapInfoCnt?.text = "자전거보유대수: " + mapInfoCnt.toString()
+                                getmapInfoNum?.text = "전화번호: " + mapInfoNum
 
                                 var mapInfoLayout = findViewById<LinearLayout>(R.id.map_info_layout2)
 
