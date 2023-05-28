@@ -2,12 +2,14 @@ package com.example.test1
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,20 +79,35 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         call.enqueue(object : Callback<NaverMapItem> {
             override fun onResponse(call: Call<NaverMapItem>, response: Response<NaverMapItem>) {
-
                 if (response.isSuccessful) {
                     naverMapList = response.body()!!
                     naverMapInfo = naverMapList?.MAPSTOREINFO!!
 
-                    val marker = Marker()
+                    for (i in naverMapInfo.indices) {
+                        val markers = arrayOfNulls<Marker>(naverMapInfo.size)
 
-                    val lat = naverMapInfo!![0]?.storeLat
-                    val lnt = naverMapInfo!![0]?.storeLng
+                        markers[i] = Marker()
+                        val lat = naverMapInfo[i]?.storeLat
+                        val lnt = naverMapInfo[i]?.storeLng
+                        markers[i]?.position = LatLng(lat!!, lnt!!)
+                        markers[i]?.map = naverMap
 
-                    Log.d("TAG", "lat: $lat, lnt: $lnt")
+                        val finalI = i
+                        markers[i]?.setOnClickListener(Overlay.OnClickListener { overlay ->
+                            Toast.makeText(application, "마커 $finalI 클릭", Toast.LENGTH_SHORT).show()
+                            false
+                        })
+                    }
 
-                    marker.position = LatLng(lat!!, lnt!!)
-                    marker.map = naverMap
+//                    val marker = Marker()
+//
+//                    val lat = naverMapInfo!![0]?.storeLat
+//                    val lnt = naverMapInfo!![0]?.storeLng
+//
+//                    Log.d("TAG", "lat: $lat, lnt: $lnt")
+//
+//                    marker.position = LatLng(lat!!, lnt!!)
+//                    marker.map = naverMap
 
                     // 통신 실패 처리
                 }
