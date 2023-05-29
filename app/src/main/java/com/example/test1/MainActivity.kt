@@ -115,7 +115,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         val finalI = i
                         markers[i]?.setOnClickListener(object : Overlay.OnClickListener {
                             override fun onClick(@NonNull overlay: Overlay): Boolean {
+                                val cameraUpdate = CameraUpdate.scrollTo(markers[i]?.position!!)
+                                cameraUpdate.animate(CameraAnimation.Easing)
+                                naverMap.moveCamera(cameraUpdate)
 
+                                // 클릭한 마커에 해당하는 자전거 대여소 정보를 불러와 info 창에 표시
                                 val mapInfoName = naverMapInfo[finalI]?.storeName
                                 val mapInfoLoca = naverMapInfo[finalI]?.storeLocation
                                 val mapInfoCate = naverMapInfo[finalI]?.storeCategory
@@ -127,8 +131,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                                 val getmapInfoCate = findViewById<TextView>(R.id.map_info_cate)
                                 val getmapInfoCnt = findViewById<TextView>(R.id.map_info_cnt)
                                 val getmapInfoNum = findViewById<TextView>(R.id.map_info_num)
-
-
 
                                 getMapInfoName?.text = mapInfoName
                                 getMapInfoLoca?.text = mapInfoLoca
