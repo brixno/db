@@ -19,6 +19,7 @@ import com.naver.maps.map.NaverMapSdk
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.widget.LocationButtonView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -136,9 +137,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                                 getmapInfoNum?.text = "전화번호: " + mapInfoNum
 
                                 var mapInfoLayout = findViewById<LinearLayout>(R.id.map_info_layout2)
+                                var LocationLayout = findViewById<LinearLayout>(R.id.locationLayout)
 
                                 mapInfoLayout?.visibility = View.VISIBLE
-
+                                LocationLayout?.visibility = View.VISIBLE
                                 return false
                             }
                         })
@@ -161,6 +163,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val uiSettings = naverMap.uiSettings
 
         uiSettings.isLocationButtonEnabled = true
+        uiSettings.isCompassEnabled = true
+
+        val locationButtonView = findViewById<LocationButtonView>(R.id.location)
+        locationButtonView.map = naverMap
 
         ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
     }
