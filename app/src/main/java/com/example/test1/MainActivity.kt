@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import com.google.gson.annotations.SerializedName
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.NaverMapSdk
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
@@ -98,6 +100,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                         markers[i]?.position = LatLng(lat!!, lnt!!)
                         markers[i]?.map = naverMap
 
+                        val btnToggleBicycle = findViewById<Button>(R.id.btn_toggle_bicycle)
+                        btnToggleBicycle.setOnClickListener {
+                            val isBicycleLayerEnabled = naverMap.isLayerGroupEnabled(NaverMap.LAYER_GROUP_BICYCLE)
+                            naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BICYCLE, !isBicycleLayerEnabled)
+                            if (!isBicycleLayerEnabled) {
+                                btnToggleBicycle.text = "자전거 도로"
+                            } else {
+                                btnToggleBicycle.text = "자전거 도로"
+                            }
+                        }
+
                         val finalI = i
                         markers[i]?.setOnClickListener(object : Overlay.OnClickListener {
                             override fun onClick(@NonNull overlay: Overlay): Boolean {
@@ -130,22 +143,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                             }
                         })
                     }
-
-//                    val marker = Marker()
-//
-//                    val lat = naverMapInfo!![0]?.storeLat
-//                    val lnt = naverMapInfo!![0]?.storeLng
-//
-//                    Log.d("TAG", "lat: $lat, lnt: $lnt")
-//
-//                    marker.position = LatLng(lat!!, lnt!!)
-//                    marker.map = naverMap
-
-                    // 통신 실패 처리
                 }
             }
-
-            override fun onFailure(call: Call<NaverMapItem>, t: Throwable) {
+            override fun onFailure(call: Call<NaverMapItem>, t: Throwable) { // 통신 실패 처리
                 val errorMessage = t.message
                 Log.d("TAG", "Error: $errorMessage")
             }
@@ -164,4 +164,5 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
         ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
     }
+
 }

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_toggle_bicycle"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:textSize="16sp"
+        android:alpha="0.6"
+        android:layout_margin="12dp"
+        android:text="자전거 도로"
+        />
+
     <fragment
         android:id="@+id/map_fragment"
         android:layout_width="match_parent"
@@ -23,19 +33,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             tools:ignore="UselessParent">
+
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="120dp"
-                android:src="@drawable/bicycle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/rent"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="10dp"
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:orientation="vertical">
 
@@ -44,7 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="자전거대여소명"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -52,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="소재지지번주소"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -60,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="자전거대여소구분"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
 
                 <TextView
@@ -68,17 +82,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="자전거보유대수"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
                 <TextView
                     android:id="@+id/map_info_num"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="관리기관전화번호"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     tools:ignore="HardcodedText" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+
 
 </FrameLayout>
