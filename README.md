@@ -5,7 +5,7 @@
 > Watch the demonstration video
 >![image3](https://github.com/brixno/db/assets/104503792/c1f652e6-6ad7-4d0d-ae75-876a87c7bfe9)
 
-> <img src="(https://github.com/brixno/db/assets/104503792/a3cfde1a-d577-4841-b330-fd3bc8686679) width="200"/>
+>![image3](https://github.com/brixno/db/assets/104503792/a3cfde1a-d577-4841-b330-fd3bc8686679){: width="100" height="100"}
 
 ### WatchDemo and Follow
 >
