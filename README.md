@@ -3,9 +3,10 @@
 >
 ## ✅ Demo
 > Watch the demonstration video
-> <img src="https://github.com/brixno/db/assets/104503792/c1f652e6-6ad7-4d0d-ae75-876a87c7bfe9" width="350" height="550"/>
-
-> <img src="https://github.com/brixno/db/assets/104503792/a3cfde1a-d577-4841-b330-fd3bc8686679" width="350" height="550"/>
+> 
+> <img src="https://github.com/brixno/db/assets/104503792/c1f652e6-6ad7-4d0d-ae75-876a87c7bfe9" width="300" height="550"/>
+> 
+> <img src="https://github.com/brixno/db/assets/104503792/a3cfde1a-d577-4841-b330-fd3bc8686679" width="300" height="550"/>
 
 ### WatchDemo and Follow
 >
